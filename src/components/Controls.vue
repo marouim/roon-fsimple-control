@@ -1,41 +1,45 @@
 <template>
-  <v-container>
-    <v-flex>
-      <v-card>
+  <v-container fluid>
+    <v-col >
+      <v-row>
         <v-btn
-          class="mx-1"
-          dark
-          small
+          style="height: 100px;"
+          class="flex-grow-1 mx-1"
           color="primary"
         >
           <v-icon dark>
             mdi-play
           </v-icon>
         </v-btn>
+
         <v-btn
-          class="mx-1"
-          dark
-          small
+          class="flex-grow-1 mx-1"
+          style="height: 100px;"
           color="primary"
         >
           <v-icon dark>
             mdi-pause
           </v-icon>
         </v-btn>
+
         <v-btn
-          class="mx-1"
-          dark
-          small
+          class="flex-grow-1 mx-1"
+          style="height: 100px;"
           color="primary"
         >
           <v-icon dark>
             mdi-stop
           </v-icon>
         </v-btn>
+      </v-row>
+      <v-row class="mt-6">
+
+
+        
+
         <v-btn
-          class="mx-1"
-          dark
-          small
+          class="flex-grow-1 mx-1 grey darken-3"
+          style="height: 70px;"
           color="primary"
         >
           <v-icon dark>
@@ -43,45 +47,61 @@
           </v-icon>
         </v-btn>
         <v-btn
-          class="mx-1"
-          dark
-          small
+          class="flex-grow-1 mx-1 grey darken-3"
+          style="height: 70px;"
           color="primary"
         >
           <v-icon dark>
             mdi-skip-next
           </v-icon>
         </v-btn>
-      </v-card>
-      <v-card>
+      </v-row>
+
+      <v-row class="mt-10">
         <v-slider
-          v-model="bpm"
-          :color="color"
+          v-model="volume"
           track-color="grey"
           always-dirty
-          min="40"
-          max="218"
+          min="0"
+          max="100"
+          :thumb-size="24"
+          thumb-label="always"
         >
           <template v-slot:prepend>
-            <v-icon
-              :color="color"
+
+            <v-btn
+              class="flex-grow-1 mx-1 grey darken-3"
+
+              color="primary"
               @click="volume_down"
             >
-              mdi-minus
-            </v-icon>
+              <v-icon dark>
+                mdi-minus
+              </v-icon>
+            </v-btn>
+
+
           </template>
 
           <template v-slot:append>
-            <v-icon
-              :color="color"
+
+            <v-btn
+              class="flex-grow-1 mx-1 grey darken-3"
+
+              color="primary"
               @click="volume_up"
             >
-              mdi-plus
-            </v-icon>
+              <v-icon dark>
+                mdi-plus
+              </v-icon>
+            </v-btn>
+
           </template>
         </v-slider>
-      </v-card>
-    </v-flex>
+
+      </v-row>
+    </v-col>
+    
 
 
   </v-container>
@@ -92,18 +112,22 @@
     name: 'Controls',
 
     data: () => ({
-
+      volume: 0
     }),
 
     methods: {
 
       volume_down() {
-
+        this.volume -= 1;
       },
 
       volume_up() {
-
+        this.volume += 1;
       }
     }
   }
 </script>
+
+<style>
+
+</style>
