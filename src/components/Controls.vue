@@ -2,6 +2,14 @@
   <v-container fluid>
     <v-col >
       <v-row>
+        <v-select
+          v-model="current_zone_id"
+          :items="zones"
+          item-text="display_name"
+          item-value="zone_id"
+        ></v-select>
+      </v-row>
+      <v-row>
         <v-btn
           style="height: 100px;"
           class="flex-grow-1 mx-1"
@@ -16,6 +24,7 @@
           class="flex-grow-1 mx-1"
           style="height: 100px;"
           color="primary"
+          @click="pause"
         >
           <v-icon dark>
             mdi-pause
@@ -108,14 +117,25 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from "vuex";
+
   export default {
     name: 'Controls',
 
     data: () => ({
-      volume: 0
+      volume: 0,
+      current_zone_id: null
     }),
 
+    watch: {
+      current_zone_id() {
+        this.update_current_zone(this.current_zone_id);
+      }
+    },
+
     methods: {
+
+      ...mapActions(["pause", "update_current_zone"]),
 
       volume_down() {
         this.volume -= 1;
@@ -124,7 +144,11 @@
       volume_up() {
         this.volume += 1;
       }
-    }
+    },
+
+    computed: {
+      ...mapGetters(["status", "current_zone_id", "zones"])
+    },
   }
 </script>
 
